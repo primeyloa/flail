@@ -1,0 +1,322 @@
+{
+  "cliVersion": "2.1.310",
+  "colours": {
+    "body": "#D77757",
+    "background": "#000000"
+  },
+  "poses": {
+    "default": {
+      "eyes": "open",
+      "arms": "down",
+      "feet": "both"
+    },
+    "arms-up": {
+      "eyes": "open",
+      "arms": "up",
+      "feet": "both"
+    },
+    "look-left": {
+      "eyes": "left",
+      "arms": "down",
+      "feet": "both"
+    },
+    "look-right": {
+      "eyes": "right",
+      "arms": "down",
+      "feet": "both"
+    }
+  },
+  "arms": {
+    "down": {
+      "r1L": " ▐",
+      "r1R": "",
+      "r2L": "▝▜",
+      "r2R": "█▀"
+    },
+    "up": {
+      "r1L": "▗▟",
+      "r1R": "▄",
+      "r2L": " ▜",
+      "r2R": "█▘"
+    },
+    "one-up": {
+      "r1L": " ▐",
+      "r1R": "▄",
+      "r2L": "▝▜",
+      "r2R": "█▘"
+    }
+  },
+  "eyes": {
+    "open": [
+      {
+        "glyphs": "▛███▛█"
+      }
+    ],
+    "left": [
+      {
+        "glyphs": "▟███▟█"
+      }
+    ],
+    "right": [
+      {
+        "glyphs": "█▟███▟"
+      }
+    ],
+    "closed": [
+      {
+        "glyphs": "▂",
+        "lid": true
+      },
+      {
+        "glyphs": "███"
+      },
+      {
+        "glyphs": "▂",
+        "lid": true
+      },
+      {
+        "glyphs": "█"
+      }
+    ],
+    "wink": [
+      {
+        "glyphs": "▛███"
+      },
+      {
+        "glyphs": "▂",
+        "lid": true
+      },
+      {
+        "glyphs": "█"
+      }
+    ]
+  },
+  "feet": {
+    "both": " ▝▝   ▝▝ ",
+    "left": " ▝▝      ",
+    "right": "      ▝▝ "
+  },
+  "facing": {
+    "right-12": [
+      {
+        "glyphs": " ▐█▜██▛█ ",
+        "from": 2,
+        "to": 8
+      },
+      {
+        "glyphs": "▝▜██████▀",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": " ▝▝   ▝▝ ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "right-30": [
+      {
+        "glyphs": "  █▛██▛▌ ",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": " ▝█████▛ ",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▘▘  ▘▘ ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "right-55": [
+      {
+        "glyphs": "  ▐█▛█▜  ",
+        "from": 3,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▐████  ",
+        "from": 3,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▝▝ ▝▝  ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "right-75": [
+      {
+        "glyphs": "   ██▛▌  ",
+        "from": 3,
+        "to": 6
+      },
+      {
+        "glyphs": "   ███▌  ",
+        "from": 3,
+        "to": 6
+      },
+      {
+        "glyphs": "   ▘  ▘  ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "edge": [
+      {
+        "glyphs": "   ▐██   ",
+        "from": 4,
+        "to": 6
+      },
+      {
+        "glyphs": "   ▐██   ",
+        "from": 4,
+        "to": 6
+      },
+      {
+        "glyphs": "   ▝ ▝   ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "back-105": [
+      {
+        "glyphs": "   ███▌  ",
+        "from": 3,
+        "to": 6
+      },
+      {
+        "glyphs": "   ███▌  ",
+        "from": 3,
+        "to": 6
+      },
+      {
+        "glyphs": "   ▘  ▘  ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "back-125": [
+      {
+        "glyphs": "  ▐████  ",
+        "from": 3,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▐████  ",
+        "from": 3,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▝▝ ▝▝  ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "back-150": [
+      {
+        "glyphs": "  █████▌ ",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": " ▝█████▛ ",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▘▘  ▘▘ ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "back": [
+      {
+        "glyphs": " ▐██████ ",
+        "from": 2,
+        "to": 8
+      },
+      {
+        "glyphs": "▝▜██████▀",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": " ▝▝   ▝▝ ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "left-75": [
+      {
+        "glyphs": "   ▛██▌  ",
+        "from": 3,
+        "to": 6
+      },
+      {
+        "glyphs": "   ███▌  ",
+        "from": 3,
+        "to": 6
+      },
+      {
+        "glyphs": "   ▘  ▘  ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "left-55": [
+      {
+        "glyphs": "  ▐▜▛██  ",
+        "from": 3,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▐████  ",
+        "from": 3,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▝▝ ▝▝  ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "left-30": [
+      {
+        "glyphs": "  ▛██▛█▌ ",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": " ▝█████▛ ",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": "  ▘▘  ▘▘ ",
+        "from": 0,
+        "to": 0
+      }
+    ],
+    "left-12": [
+      {
+        "glyphs": " ▐▛███▜█ ",
+        "from": 2,
+        "to": 8
+      },
+      {
+        "glyphs": "▝▜██████▀",
+        "from": 2,
+        "to": 7
+      },
+      {
+        "glyphs": " ▝▝   ▝▝ ",
+        "from": 0,
+        "to": 0
+      }
+    ]
+  }
+}

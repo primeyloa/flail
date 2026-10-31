@@ -12,8 +12,23 @@ Newest last. Format: date, panel, verdict, what the user said, what changed.
 - 2026-10-31, p03 v1: passed.
 - 2026-10-31, p04 v1 and full 15s preview: passed.
 
+## vid002
+
+- 2026-10-31, script: approved, 20 seconds, five panels. Tests of coaster and liquid glass accepted with the script.
+- 2026-10-31, p01 v1: passed.
+- 2026-10-31, p02 v1, with the whip-pan jump into the car: passed.
+- 2026-10-31, p03 v1: passed.
+- 2026-10-31, p04 v1: passed.
+- 2026-10-31, p05 v1 and full 20s preview: passed.
+
 ## Agent's own catches (fixed before showing)
 
 - p01: wave arm crossed the face; head collided with the sun; first frame nearly empty; a raised hand under the disc looked like balancing a ball.
 - p03: laptop visible in the first frame; stand() overrode Esi's arm at the cut; laptop hid a chin.
 - p04: headline fragments showed inside the closing circle.
+- vid002 tests: car started below the crest and stalled; balloon string crossed Clawd; wind lines crossed characters.
+- vid002 p01: dark track behind bubble text hurt legibility.
+- vid002 p02: "That." appeared over the wrong Clawd.
+- vid002 p03: balloon jumped at the cut; coral disc merged with the coral balloon on the drop.
+- vid002 p04: wind lines vanished for a frame at the cut, and kept streaming after the camera stopped.
+- Clawd: first sprites were too wide, as quarter-cell blocks are tall, not square. Comparing with a published image caught it.

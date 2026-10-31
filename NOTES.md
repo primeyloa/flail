@@ -12,6 +12,6 @@ Chrome's `backdrop-filter: url(#svg-filter)` renders through HyperFrames and ref
 
 ## Later
 
-- vid002 idea: two Clawds, a balloon, a roller coaster ride, ending on "Join the Claude Builder Club and let's go for a ride". Needs its own pack and permission to use Clawd.
+- vid002 idea: two Clawds, a balloon, a roller coaster ride, ending on "Join the Claude Builder Club and let's go for a ride". Needs its own pack. Clawd is confirmed for club use; see `assets/clawd/`.
 
 - Hackathon promo: may use UG branding once permission is confirmed.

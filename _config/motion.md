@@ -16,7 +16,7 @@ Start each panel on the previous panel's last frame:
 - Recreate the end state with `tl.set` at time 0, or use the previous frame directly by referencing `assets/from-previous.png`, which `tools/render.mjs` generates.
 - Don't set the same property twice at time 0, because the wrong one can win.
 - Start props fully outside the frame.
-- `tools/sheet.mjs` compares the frames either side of each cut.
+- `tools/sheet.mjs` compares the frames either side of each cut. It also warns on real motion across a cut, so look at the cut image before treating a warning as a bug.
 
 ## HyperFrames basics
 

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../../../../../_config/tokens.css">
+  <style>
+    html, body { margin: 0; background: var(--ivory); }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ivory); }
+    #far { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #far > div { position: absolute; }
+    #wind { position: absolute; left: 540px; top: 960px; width: 0; height: 0; }
+    #world { position: absolute; left: 0; top: 0; width: 10px; height: 10px; transform-origin: 0 0; }
+    #ground { position: absolute; left: -2000px; top: 2700px; width: 8000px; height: 2px; background: var(--ink); }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="root" data-start="0" data-duration="5" data-fps="30" data-width="1080" data-height="1920">
+    <div id="far">
+      <div style="left:640px;top:880px;width:640px;height:620px;border-radius:320px 320px 0 0;background:var(--sand)"></div>
+      <div style="left:-180px;top:1060px;width:560px;height:440px;border-radius:280px 280px 0 0;background:var(--sand)"></div>
+      <div id="disc" style="left:690px;top:430px;width:300px;height:300px;border-radius:50%;background:var(--coral)"></div>
+      <div style="left:1320px;top:-260px;width:760px;height:760px;border-radius:50%;background:var(--sand)"></div>
+      <div style="left:1700px;top:560px;width:560px;height:940px;border-radius:280px 280px 0 0;background:var(--sand)"></div>
+    </div>
+    <div id="wind"></div>
+    <div id="world">
+      <div id="ground"></div>
+      <div id="track-holder"></div>
+    </div>
+  </div>
+
+  <script src="../../../../../../library/vendor/gsap.min.js"></script>
+  <script src="../../../../../../packs/mascot-ride/lib/clawd.js"></script>
+  <script src="../../../../../../packs/mascot-ride/lib/ride.js"></script>
+  <script>
+    const R = FlailRide;
+    const FIRST = 0, LAST = 150; // This panel plays frames 0-149 of the ride; p04 continues from 150.
+    const rail = R.buildTrack(document.getElementById("track-holder"));
+    const rider = R.buildCar(document.getElementById("world"));
+    const POSES = ["default", "arms-up", "blink"];
+    const front = FlailClawd.create(rider.seatA, POSES);
+    const back = FlailClawd.create(rider.seatB, POSES);
+
+    const { samples, topSpeed } = R.planRide(rail);
+    const tl = gsap.timeline({ paused: true });
+    const step = { duration: 1 / 30, ease: "none" };
+
+    // Far layer starts where p02 left it, then moves at a fraction of the camera.
+    const start = samples[0].camera;
+    samples.slice(FIRST, LAST).forEach((x, i) => {
+      const at = i / 30;
+      const shot = x.camera;
+      const farX = -200 + (shot.x - start.x) * 0.3, farY = 620 + (shot.y - start.y) * 0.3;
+      if (i === 0) {
+        tl.set("#world", { x: shot.x, y: shot.y, scale: shot.zoom }, 0);
+        tl.set("#far", { x: farX, y: farY }, 0);
+        tl.set(rider.car, { x: x.x, y: x.y, rotation: x.angle }, 0);
+        tl.set(rider.balloon, { rotation: x.balloon }, 0);
+        return;
+      }
+      tl.to("#world", { x: shot.x, y: shot.y, scale: shot.zoom, ...step }, at - 1 / 30);
+      tl.to("#far", { x: farX, y: farY, ...step }, at - 1 / 30);
+      tl.to(rider.car, { x: x.x, y: x.y, rotation: x.angle, ...step }, at - 1 / 30);
+      tl.to(rider.balloon, { rotation: x.balloon, ...step }, at - 1 / 30);
+    });
+
+    // Arms go up as the drop takes hold, the back Clawd a beat behind, then down on the climb.
+    const fast = samples.find((x) => x.speed > topSpeed * 0.4);
+    const easing = samples.find((x) => x.x > 2000);
+    FlailClawd.pose(tl, front, "arms-up", fast.t);
+    FlailClawd.pose(tl, back, "arms-up", fast.t + 0.1);
+    FlailClawd.pose(tl, front, "default", easing.t);
+    FlailClawd.pose(tl, back, "default", easing.t + 0.1);
+
+    // The disc would merge with the coral balloon on the drop, so it fades back to sand.
+    tl.to("#disc", { backgroundColor: "#F0EEE6", duration: 1, ease: "sine.inOut" }, 0.4);
+
+    R.wind(tl, document.getElementById("wind"), samples, { from: FIRST, to: LAST });
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["root"] = tl;
+  </script>
+</body>
+</html>

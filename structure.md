@@ -14,7 +14,8 @@ flail/
 ├── library/vendor/     # GSAP, shared by every pack
 ├── packs/              # one folder per animation type
 │   ├── _starter/       # copied by: node tools/new.mjs pack <name>
-│   └── flat-people/    # pack.md, lessons.md, golden.md, template.html, lib/
+│   ├── flat-people/    # pack.md, lessons.md, golden.md, template.html, lib/
+│   └── mascot-ride/    # the same files, for Clawd and physics-led motion
 ├── memory/             # log.md and lessons.md (max 40 lines) that apply to every pack
 ├── tools/              # new, lint, render, sheet: no LLM involved
 ├── .claude/skills/     # new-video, new-pack, write-script, build-panel, revise, log-feedback

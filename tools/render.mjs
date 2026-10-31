@@ -38,7 +38,9 @@ const field = (key) => (yaml.match(new RegExp(`^\\s+${key}:\\s*(.+?)\\s*$`, "m")
 const event = { date: field("date"), venue: field("venue") };
 const panels = [...yaml.matchAll(/^\s+-\s+(\S+)\s*$/gm)].map((m) => m[1]);
 
-if (isFinal) {
+// Only panels with variables show event details, so only they need them filled in.
+const usesEvent = panels.some((panel) => readFileSync(join(videoDir, panel, "scene.html"), "utf8").includes("data-composition-variables"));
+if (isFinal && usesEvent) {
   const missing = Object.entries(event).filter(([, value]) => !value || /^tba$/i.test(value)).map(([key]) => key);
   if (missing.length) {
     console.error(`Refusing final render: set ${missing.join(" and ")} in videos/${videoId}/video.yaml`);
@@ -68,7 +70,7 @@ panels.forEach((panel, i) => {
   const scene = join(panelDir, "scene.html");
   const output = join(outDir, `${id}.mp4`);
   const html = readFileSync(scene, "utf8");
-  const usesEvent = html.includes("data-composition-variables");
+  const hasVariables = html.includes("data-composition-variables");
 
   // A panel can open on the previous panel's last frame, so the cut can't drift.
   if (html.includes("assets/from-previous.png")) {
@@ -76,16 +78,18 @@ panels.forEach((panel, i) => {
     execFileSync(ffmpeg, ["-y", "-v", "error", "-sseof", "-0.04", "-i", outputs[i - 1], "-frames:v", "1", join(panelDir, "assets/from-previous.png")], { env });
   }
 
-  const hash = hashPanel(panelDir, html, usesEvent);
+  const hash = hashPanel(panelDir, html, hasVariables);
   outputs.push(output);
   if (cache[id] === hash && existsSync(output)) {
     console.log(`${id}: unchanged, skipped`);
     return;
   }
+  const started = Date.now();
   console.log(`${id}: rendering`);
   const args = ["render", ROOT, "-c", scene.slice(ROOT.length + 1), "-o", output, "-w", "2", "--quiet"];
-  if (usesEvent) args.push("--variables", JSON.stringify(event));
+  if (hasVariables) args.push("--variables", JSON.stringify(event));
   execFileSync(hyperframes, args, { env, cwd: ROOT, stdio: ["ignore", "ignore", "inherit"] });
+  console.log(`${id}: done in ${Math.round((Date.now() - started) / 1000)}s`);
   cache[id] = hash;
   writeFileSync(cachePath, JSON.stringify(cache, null, 2));
 });

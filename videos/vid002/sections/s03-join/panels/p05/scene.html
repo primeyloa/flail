@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../../../../../_config/tokens.css">
+  <style>
+    html, body { margin: 0; background: var(--ivory); }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ivory); }
+    #still { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #message { position: absolute; left: 90px; top: 270px; margin: 0; font: 400 108px/1.1 var(--font-display); color: var(--ink); }
+    #message span { display: block; }
+    #logo { position: absolute; left: 220px; top: 1300px; width: 640px; height: 192px; }
+    #link { position: absolute; left: 0; top: 1516px; width: 100%; text-align: center; font: 500 34px/1 var(--font-text); color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="root" data-start="0" data-duration="4" data-fps="30" data-width="1080" data-height="1920">
+    <img id="still" src="assets/from-previous.png" alt="">
+    <h1 id="message"><span id="l1">Join the Claude</span><span id="l2">Builder Club and</span><span id="l3">let's go for a ride.</span></h1>
+    <img id="logo" src="assets/logo.png" alt="Claude Builder Club, University of Ghana">
+    <div id="link">Link in caption</div>
+  </div>
+
+  <script src="../../../../../../library/vendor/gsap.min.js"></script>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const rise = (target, at) => tl.fromTo(target, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, at);
+
+    tl.set(["#l1", "#l2", "#l3", "#logo", "#link"], { opacity: 0 }, 0);
+    rise("#l1", 0.1);
+    rise("#l2", 0.35);
+    rise("#l3", 0.6);
+    rise("#logo", 1.4);
+    rise("#link", 1.7);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["root"] = tl;
+  </script>
+</body>
+</html>
