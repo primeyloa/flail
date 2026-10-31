@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Checks a video's panels against the project's rules, using no LLM tokens.
 //   node tools/lint.mjs vid001
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,8 +19,14 @@ const [width, height] = (top(yaml, "size") || "1080x1920").split("x");
 const maxSeconds = Number(top(yaml, "max_seconds") || Infinity);
 
 const HEX = /#[0-9a-fA-F]{6}\b/g;
-const allowed = new Set(["_config/tokens.css", "_config/cast.js"].flatMap((file) =>
-  (readFileSync(join(ROOT, file), "utf8").match(HEX) || []).map((hex) => hex.toUpperCase())));
+const pack = top(yaml, "pack");
+if (!pack || !existsSync(join(ROOT, "packs", pack))) {
+  console.error(`error    video.yaml must name a pack in packs/ (found: ${pack || "none"})`);
+  process.exit(1);
+}
+const packLib = join(ROOT, "packs", pack, "lib");
+const allowed = new Set([join(ROOT, "_config/tokens.css"), ...readdirSync(packLib).map((file) => join(packLib, file))].flatMap((file) =>
+  (readFileSync(file, "utf8").match(HEX) || []).map((hex) => hex.toUpperCase())));
 
 const errors = [], warnings = [];
 let total = 0;
@@ -46,7 +52,7 @@ panels.forEach((panel, i) => {
   if (!html.includes('window.__timelines["root"]')) error('timeline must be registered on window.__timelines["root"]');
 
   const offPalette = [...new Set((html.match(HEX) || []).map((hex) => hex.toUpperCase()))].filter((hex) => !allowed.has(hex));
-  if (offPalette.length) error(`colours not in tokens.css or cast.js: ${offPalette.join(", ")}`);
+  if (offPalette.length) error(`colours not in tokens.css or the pack's lib/: ${offPalette.join(", ")}`);
 
   if (/(src|href)="https?:/.test(html)) error("loads a remote file; use local copies so renders are repeatable");
   for (const [, path] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {

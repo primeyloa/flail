@@ -1,4 +1,4 @@
-# Golden examples
+# Golden examples: flat people
 
 Work the user passed. Read the one closest to your task instead of inventing an approach. Add panels here when they pass, with what makes them worth copying.
 

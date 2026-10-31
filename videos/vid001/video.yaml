@@ -1,6 +1,7 @@
 # Edit date and venue here, then run: node tools/render.mjs vid001 --final
 # Only the end card re-renders. The final render refuses while either is TBA.
 title: Club kick-off teaser
+pack: flat-people
 size: 1080x1920
 max_seconds: 15
 

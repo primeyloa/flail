@@ -10,13 +10,16 @@ editable by hand.
 flail/
 ├── CLAUDE.md, AGENTS.md, NOTES.md, structure.md
 ├── assets/             # brand kit and QR codes supplied by the club
-├── _config/            # tokens.css, fonts, style-guide.md, motion.md, cast.js
-├── library/            # character rig, panel template, vendored GSAP
-├── memory/             # log.md, lessons.md (max 40 lines), golden/ (best examples)
+├── _config/            # brand: tokens.css, fonts, style-guide.md; shared motion.md
+├── library/vendor/     # GSAP, shared by every pack
+├── packs/              # one folder per animation type
+│   ├── _starter/       # copied by: node tools/new.mjs pack <name>
+│   └── flat-people/    # pack.md, lessons.md, golden.md, template.html, lib/
+├── memory/             # log.md and lessons.md (max 40 lines) that apply to every pack
 ├── tools/              # new, lint, render, sheet: no LLM involved
-├── .claude/skills/     # new-video, write-script, build-panel, revise, log-feedback
+├── .claude/skills/     # new-video, new-pack, write-script, build-panel, revise, log-feedback
 └── videos/vid001/
-    ├── video.yaml, brief.md, asset-requests.md
+    ├── video.yaml (names its pack), brief.md, asset-requests.md
     ├── sections/s01-hook/panels/p01/
     │   ├── script.md, scene.html, panel.yaml
     │   └── assets/
@@ -46,6 +49,7 @@ Each step waits for approval: brief, script, animatic, low-res panels, final ren
 | 13  | Reuse           | Template repo now; plugin after vid002                                                 |
 | 14  | Budget          | Claude subscription: one panel per session, check `/usage`                             |
 | 15  | Feel            | Premium and calm: unhurried motion, generous space, few elements, editorial type       |
+| 16  | Animation types | One shared core plus a swappable pack per type; a video loads only its own pack       |
 
 ## vid001 cut
 

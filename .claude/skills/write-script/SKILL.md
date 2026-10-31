@@ -5,7 +5,7 @@ description: Write a panel-by-panel script and storyboard from a video's brief. 
 
 Write the script for: $ARGUMENTS
 
-Read the video's `brief.md`, `_config/style-guide.md` and `memory/lessons.md`.
+Read the video's `brief.md`, `_config/style-guide.md`, `memory/lessons.md`, and the `pack.md` of the pack its `video.yaml` names.
 
 1. Propose a table: panel, time range, what's on screen, on-screen text, what it covers. Check the times add up to the brief's length and the text is readable at 2-3 words per second.
 2. Plan how each panel flows into the next, with continuous camera or character movement instead of hard cuts.

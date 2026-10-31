@@ -46,10 +46,12 @@ if (isFinal) {
   }
 }
 
-const SHARED = ["library/rig/character.js", "_config/cast.js", "_config/tokens.css"];
+const pack = (yaml.match(/^pack:\s*(\S+)/m) || [])[1];
+const packLib = join(ROOT, "packs", pack, "lib");
+const SHARED = [join(ROOT, "_config/tokens.css"), ...readdirSync(packLib).sort().map((file) => join(packLib, file))];
 function hashPanel(panelDir, html, usesEvent) {
   const hash = createHash("sha256").update(html);
-  SHARED.forEach((file) => hash.update(readFileSync(join(ROOT, file))));
+  SHARED.forEach((file) => hash.update(readFileSync(file)));
   const assets = join(panelDir, "assets");
   if (existsSync(assets)) readdirSync(assets).sort().forEach((file) => hash.update(readFileSync(join(assets, file))));
   if (usesEvent) hash.update(JSON.stringify(event));
