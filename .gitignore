@@ -1,0 +1,6 @@
+node_modules/
+tools/bin/
+videos/*/output/
+videos/*/sections/*/panels/*/assets/from-previous.png
+renders/
+.hyperframes/

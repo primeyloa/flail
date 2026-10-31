@@ -1,0 +1,18 @@
+/* Sampled from the CBC @ UG brand kit. Skin tones are cast-only additions. */
+@font-face { font-family: "Source Serif 4"; src: url("fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url("fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+
+:root {
+  --coral: #D97757;
+  --ink: #141413;
+  --ivory: #FAF9F5;
+  --sand: #F0EEE6;
+  --sand-deep: #E8E6DC;
+  --grey: #5E5D59;
+  --ink-soft: #2E2E2B;
+  --grey-on-dark: #B5B3AC;
+  --skin-deep: #4A2A1C;
+  --skin-brown: #6B3F2A;
+  --font-display: "Source Serif 4", serif;
+  --font-text: "Inter", sans-serif;
+}

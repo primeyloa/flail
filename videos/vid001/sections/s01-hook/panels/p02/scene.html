@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../../../../../_config/tokens.css">
+  <style>
+    html, body { margin: 0; background: var(--ivory); }
+    #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ivory); }
+    #far, #world { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 1500px; }
+    .arch { position: absolute; background: var(--sand); border-radius: 260px 260px 0 0; }
+    #disc { position: absolute; left: 870px; top: 300px; width: 120px; height: 120px; background: var(--coral); border-radius: 50%; }
+    #ground { position: absolute; left: 0; top: 1500px; width: 1080px; height: 2px; background: var(--ink); }
+    .mover { position: absolute; left: 0; top: 598px; width: 520px; height: 919px; }
+    .character { width: 100%; height: 100%; overflow: visible; }
+    .character.flip { transform: scaleX(-1); }
+    #eyebrow { position: absolute; left: 90px; top: 290px; margin: 0; font: 500 26px/1 var(--font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey); }
+    .headline { position: absolute; left: 90px; top: 350px; margin: 0; font: 400 136px/1.06 var(--font-display); color: var(--ink); }
+    .headline span { display: block; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="root" data-start="0" data-duration="3" data-fps="30" data-width="1080" data-height="1920">
+    <div id="far">
+      <div class="arch" style="left:550px;top:800px;width:520px;height:700px"></div>
+      <div class="arch" style="left:1500px;top:960px;width:420px;height:540px"></div>
+    </div>
+    <div id="disc"></div>
+    <div id="ground"></div>
+    <div id="world">
+      <div class="mover" id="m-yaw" style="left:1740px"></div>
+      <div class="mover" id="m-esi" style="left:1440px"></div>
+      <div class="mover" id="m-kofi" style="left:1130px"></div>
+      <div class="mover" id="m-ama"></div>
+    </div>
+    <p id="eyebrow">Claude Builder Club</p>
+    <h1 class="headline" id="hey"><span>Hey,</span><span>builder.</span></h1>
+    <h1 class="headline" id="crew"><span>Meet your</span><span>crew.</span></h1>
+  </div>
+
+  <script src="../../../../../../library/vendor/gsap.min.js"></script>
+  <script src="../../../../../../library/rig/character.js"></script>
+  <script src="../../../../../../_config/cast.js"></script>
+  <script>
+    const R = FlailRig;
+    const place = (id, config, flip) => R.createCharacter(document.getElementById(id), { ...config, flip });
+    const amaMover = document.getElementById("m-ama");
+    const ama = place("m-ama", FlailCast.ama, false);
+    const kofi = place("m-kofi", FlailCast.kofi, true);
+    const esi = place("m-esi", FlailCast.esi, false);
+    const yaw = place("m-yaw", FlailCast.yaw, true);
+
+    const tl = gsap.timeline({ paused: true });
+    [kofi, esi, yaw].forEach((c) => R.stand(tl, c, 0));
+
+    // Matches p01's last frame so the cut between panels doesn't show.
+    const AMA_X = 476;
+    tl.set(amaMover, { x: AMA_X }, 0);
+    tl.set(ama.parts.upperB, { rotation: -122 }, 0);
+    tl.set(ama.parts.foreB, { rotation: -23.7 }, 0);
+    tl.set(ama.parts.foreA, { rotation: -6 }, 0);
+    tl.set(ama.parts.head, { rotation: 3 }, 0);
+    tl.set(ama.parts.torso, { rotation: -1.2 }, 0);
+
+    // Ama lowers her arm, then walks over to join the group.
+    const lower = { duration: 0.55, ease: "sine.inOut" };
+    tl.to(ama.parts.upperB, { rotation: -8, ...lower }, 0);
+    tl.to(ama.parts.foreB, { rotation: -6, ...lower }, 0);
+    tl.to(ama.parts.head, { rotation: 0, ...lower }, 0);
+    tl.to(ama.parts.torso, { rotation: 0, ...lower }, 0);
+    R.walk(tl, ama, amaMover, { start: 0.6, duration: 1.7, strides: 1, fromX: AMA_X, fromRest: true });
+
+    // Camera pulls back and pans across to reveal the crew.
+    const camera = { duration: 3, ease: "sine.inOut" };
+    tl.fromTo("#world", { x: 0, scale: 1 }, { x: -600, scale: 0.72, ...camera }, 0);
+    tl.fromTo("#far", { x: 0, scale: 1 }, { x: -330, scale: 0.86, ...camera }, 0);
+    tl.fromTo("#disc", { x: 0 }, { x: -60, ...camera }, 0);
+
+    R.gesture(tl, esi, 0.7, 2.3);
+    R.laugh(tl, kofi, 1.2, 1.8);
+    R.laugh(tl, yaw, 1.5, 1.5);
+    R.blink(tl, esi, 2.2);
+
+    tl.to("#hey", { opacity: 0, y: -14, duration: 0.45, ease: "power1.in" }, 0.15);
+    tl.fromTo("#crew", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.95, ease: "power2.out" }, 0.65);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["root"] = tl;
+  </script>
+</body>
+</html>

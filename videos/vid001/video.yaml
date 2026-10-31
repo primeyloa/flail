@@ -1,0 +1,15 @@
+# Edit date and venue here, then run: node tools/render.mjs vid001 --final
+# Only the end card re-renders. The final render refuses while either is TBA.
+title: Club kick-off teaser
+size: 1080x1920
+max_seconds: 15
+
+event:
+  date: TBA
+  venue: TBA
+
+panels:
+  - sections/s01-hook/panels/p01
+  - sections/s01-hook/panels/p02
+  - sections/s02-build/panels/p03
+  - sections/s03-join/panels/p04
