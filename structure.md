@@ -12,12 +12,13 @@ flail/
 ├── assets/             # brand kit and QR codes supplied by the club
 ├── _config/            # brand: tokens.css, fonts, style-guide.md; shared motion.md
 ├── library/vendor/     # GSAP, shared by every pack
+├── library/audio/      # synth for generated music and effects; nothing to license
 ├── packs/              # one folder per animation type
 │   ├── _starter/       # copied by: node tools/new.mjs pack <name>
 │   ├── flat-people/    # pack.md, lessons.md, golden.md, template.html, lib/
 │   └── mascot-ride/    # the same files, for Clawd and physics-led motion
 ├── memory/             # log.md and lessons.md (max 40 lines) that apply to every pack
-├── tools/              # new, lint, render, sheet: no LLM involved
+├── tools/              # new, lint, render, sheet, sound: no LLM involved
 ├── .claude/skills/     # new-video, new-pack, write-script, build-panel, revise, log-feedback
 └── videos/vid001/
     ├── video.yaml (names its pack), brief.md, asset-requests.md
@@ -38,7 +39,7 @@ Each step waits for approval: brief, script, animatic, low-res panels, final ren
 | 1   | Character style | Flat, rigged 2D vector; darker skin tones; male and female cast                        |
 | 2   | vid001          | 15 seconds, 1080x1920, social media teaser for the club kick-off                       |
 | 3   | Agenda          | Teaser only; full agenda goes in the post caption                                      |
-| 4   | Audio           | No voiceover; light sound effects built in; music added in the social app              |
+| 4   | Audio           | No voiceover; original generated music and effects built in, from `audio/score.mjs`    |
 | 5   | Colours         | Brand kit: `#D97757`, `#141413`, `#FAF9F5`, `#F0EEE6`, `#5E5D59`                       |
 | 6   | Backgrounds     | Ivory with sand shapes in p01-p02; `#141413` in p03-p04                                |
 | 7   | Coral           | Shapes and very large text on light; any text on dark                                  |

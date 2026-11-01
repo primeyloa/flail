@@ -21,6 +21,10 @@ Newest last. Format: date, panel, verdict, what the user said, what changed.
 - 2026-10-31, p04 v1: passed.
 - 2026-10-31, p05 v1 and full 20s preview: passed.
 
+## Sound
+
+- 2026-11-01, both videos: user asked for music and sounds. Generated original scores, moving bass above phone-speaker limits. Verdict: "Sounds good".
+
 ## Agent's own catches (fixed before showing)
 
 - p01: wave arm crossed the face; head collided with the sun; first frame nearly empty; a raised hand under the disc looked like balancing a ball.

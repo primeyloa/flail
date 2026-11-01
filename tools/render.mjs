@@ -97,5 +97,12 @@ panels.forEach((panel, i) => {
 const listPath = join(outDir, ".concat.txt");
 writeFileSync(listPath, outputs.map((file) => `file '${file}'`).join("\n"));
 const joined = join(outDir, isFinal ? "final.mp4" : "preview.mp4");
-execFileSync(ffmpeg, ["-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", listPath, "-c", "copy", joined], { env });
+// Videos with a score get their sound added here, without re-encoding the picture.
+const input = ["-f", "concat", "-safe", "0", "-i", listPath];
+if (existsSync(join(videoDir, "audio/score.mjs"))) {
+  execFileSync(process.execPath, [join(ROOT, "tools/sound.mjs"), videoId], { stdio: "inherit" });
+  execFileSync(ffmpeg, ["-y", "-v", "error", ...input, "-i", join(outDir, "audio/mix.wav"), "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", joined], { env });
+} else {
+  execFileSync(ffmpeg, ["-y", "-v", "error", ...input, "-c", "copy", joined], { env });
+}
 console.log(`Wrote ${joined.slice(ROOT.length + 1)}`);

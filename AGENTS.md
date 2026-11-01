@@ -16,6 +16,7 @@ The workflow, tools, brand and feedback log are shared. Each animation type has 
 | Build a panel | That panel's files, `_config/style-guide.md`, `_config/motion.md`, the pack's `pack.md` and `lessons.md` | `/build-panel` |
 | Change something | Only the files for that panel | `/revise` |
 | Record feedback | `memory/log.md`, the lessons files | `/log-feedback` |
+| Add or change sound | The video's `audio/score.mjs`, `_config/sound.md`, `library/audio/synth.mjs` | `node tools/sound.mjs <video>` |
 
 Do not read other panels, other packs, `assets/`, or `memory/log.md` unless the task needs them. Find exact examples in the pack's `golden.md`.
 
